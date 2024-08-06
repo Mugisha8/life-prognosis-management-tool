@@ -102,7 +102,13 @@ function patient_menu {
     read -p "Enter choice: " choice
     case $choice in
         1)
-            echo "##### View Profile Data (UPCOMING Deliverable) #######"
+            echo "View Profile Data"
+            if [[ -n $userData ]]; then 
+                data=$(echo "$userData" | awk -F, '{print "EmailAdress:","",$1 "\n","Name:", "", $3,$4 "\n","DOB:" ,"", $5 "\n","HIV status:","", $6 "\n", "DiagnosisDate:" ,"", $7 "\n","ART Status:" ,"", $8 "\n","StartDate:" ,"", $9 "\n","Country:","",$10 "\n"}')
+                echo "$data"
+            else
+                echo "User not found!"
+            fi
             ;;
         2)
             echo "##### Update Profile Data (UPCOMING Deliverable) ######"
@@ -110,9 +116,7 @@ function patient_menu {
         3)
             echo "##### Calculate Life Expectancy (UPCOMING Deliverable) ######"
             ;;
-        4)
-            return
-            ;;
+           
         *)
             echo "Invalid choice."
             ;;

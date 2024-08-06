@@ -2,3 +2,6 @@ admin@gmail.com,09-1f-fa-de-a1-ff-45-27-0c-76-e5-03-81-f9-8b-ef,admin,user,2000-
 jack@gmail.com,ea-14-97-66-79-ca-c8-2f-65-9f-49-92-d4-b9-ca-8f,jack,smith,1900-11-15,no,,,,RWA,31611159e7e6ff7843ea4627745e89225fc866621cfcfdbd40871af4413747cc,PATIENT
 kevin@gmail.com,24-3e-94-c1-5b-57-91-ef-ad-ed-43-0e-9d-7e-1c-4d,kevin,johnson,2005-05-15,yes,2007-03-18,yes,2009-04-19,RWA,85f5e10431f69bc2a14046a13aabaefc660103b6de7a84f75c4b96181d03f0b5,PATIENT
 
+rosekyalo@gmail.com,41-f3-ae-82-bf-51-d4-07-8a-a2-f4-9c-ed-35-55-72,Rose,Kyalo,1998-06-01,no,,,,KEN,03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4,PATIENT
+mary@gmail.com,3e-1c-75-bd-61-9d-26-40-5d-32-cb-c9-fc-f4-10-a1,Mary,Ken,2014-06-25,Yes,,,,TZ,88d4266fd4e6338d13b845fcf289579d209c897823b9217da3e161936f031589,PATIENT
+michael@gmail.com,83-e6-7d-26-1d-47-98-c0-42-af-8a-2e-6d-b6-7e-61,Michael,Mutunga,2002-06-10,Yes,,,,Kenya,9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0,PATIENT

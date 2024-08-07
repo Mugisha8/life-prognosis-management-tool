@@ -47,11 +47,8 @@ function complete_registration {
 
         new_record="$email,$uuid,$firstName,$lastName,$dob,$hivPositive,$diagnosisDate,$onART,$artStartDate,$country,$hashedPassword,$role"
         
-    
-        # Escape slashes and other special characters in the new record
         new_record_escaped=$(echo "$new_record" | sed -e 's/[\/&]/\\&/g')
 
-        # Update the user record in the file
         sed -i "s/^$email,$uuid,$role$/$new_record_escaped/" $USER_STORE
         
         if grep -q "$new_record" "$USER_STORE"; then
@@ -157,26 +154,41 @@ function calculate_life_expectancy {
         artStartYear=$diagnosisYear
     fi
     country=$(echo $userData | awk -F, '{print $10}')
+    countryName=$(grep "$country" "$LIFESPAN_FILE" | awk -F, '{print $1}')
     lifeExpectancy=$(grep "$country" "$LIFESPAN_FILE" | awk -F, '{print $7}')
     currentYear=$(date +%Y)
     age=$(($currentYear - $birthYear))
     remainingYears=$(awk "BEGIN {print $lifeExpectancy - $age}")
+
+    echo "Your country Name is: $countryName"
+    echo "Your country's life expectancy is: $lifeExpectancy years"
+    echo "Your current age is: $age years"
+    echo "Years remaining if you are not HIV positive: $remainingYears years"
 
     if (( $(awk "BEGIN {print ($remainingYears <= 5)}") )); then
         echo "Lifespan: $(($birthYear + 5))"
         return
     fi
 
-    remainingYearsOnDiagnosis=$(awk "BEGIN {print $lifeExpectancy - $diagnosisYear}")
-    reductionRate=0.90
-    for (( i=$diagnosisYear+1; i<=$artStartYear; i++ )); do
-        remainingYearsOnDiagnosis=$(awk "BEGIN {print $remainingYearsOnDiagnosis * $reductionRate}")
+    remainingYearsOnDiagnosis=$(awk "BEGIN {print ($remainingYears * 0.9)}")
+    delayYears=$(($artStartYear - $diagnosisYear))
+
+    echo "You were diagnosed in: $diagnosisYear"
+    echo "You started ART in: $artStartYear"
+    echo "Delay in starting ART: $delayYears years"
+    echo "Remaining years from diagnosis year if ART was started immediately: $remainingYearsOnDiagnosis years"
+
+    for (( i=0; i<$delayYears; i++ )); do
+        remainingYearsOnDiagnosis=$(awk "BEGIN {print ($remainingYearsOnDiagnosis * 0.9)}")
+        echo "Year $((i + 1)) delay, remaining years: $remainingYearsOnDiagnosis"
     done
 
-    finalRemainingYears=$(awk "BEGIN {print $remainingYearsOnDiagnosis * 0.90}")
-    lifespan=$(($diagnosisYear + ${finalRemainingYears%.*}))
+    finalRemainingYears=$(awk "BEGIN {print int($remainingYearsOnDiagnosis) + 1}")
 
-    echo "Lifespan: $lifespan"
+    lifespan=$(awk "BEGIN {print $diagnosisYear + $finalRemainingYears}")
+
+    echo "Final remaining years after considering delay: $finalRemainingYears Years"
+    echo "Your expected Year to Die: $lifespan"
 }
 
 case $1 in

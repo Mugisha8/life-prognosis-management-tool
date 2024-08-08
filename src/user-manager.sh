@@ -26,7 +26,7 @@ function complete_registration {
         read -p "Enter First Name: " firstName
         read -p "Enter Last Name: " lastName
         read -p "Enter Date of Birth (YYYY-MM-DD): " dob
-        read -p "Are you HIV positive? (yes/no): " hivPositive
+        read -p "Are you HIV positive? (yes/4no): " hivPositive
         if [[ $hivPositive == "yes" ]]; then
             read -p "Enter Diagnosis Date (YYYY-MM-DD): " diagnosisDate
             read -p "Are you on ART drugs? (yes/no): " onART

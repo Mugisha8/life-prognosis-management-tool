@@ -192,11 +192,11 @@ function patient_menu {
                 ;;
                 10)
                 read -p "Enter Old Password: " OldPassword
-                read -p "Enter New Password: " NewPassword
-                hashedPassword=$(hash_password "$OldPassword")
-                sed -i "s/$OldPassword/$hashedPassword/g" user-store.txt
+                read -s -p "Enter New Password: " NewPassword
+                hashedOldPassword=$(echo -n "$OldPassword" | openssl dgst -sha256 | awk '{print $2}')
+                hashedNewPassword=$(echo -n "$NewPassword" | openssl dgst -sha256 | awk '{print $2}')
+                sed -i "s/$hashedOldPassword/$hashedNewPassword/g" user-store.txt
                 echo "Password changed!" 
-                grep "$NewPassword" user-store.txt | awk -F, '{print "EmailAddress:","",$1 "\n","FirstName:", "", $3 "\n","LastName:","\n",$4 "\n","DOB:" ,"", $5 "\n","HIV status:","", $6 "\n", "DiagnosisDate:" ,"", $7 "\n","ART Status:" ,"", $8 "\n","StartDate:" ,"", $9 "\n","Country:","",$10 "\n"}'
                 ;;
             *)
                 echo "Invalid choice"

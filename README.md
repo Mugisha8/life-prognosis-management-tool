@@ -1,5 +1,5 @@
----------------- Life Prognosis & Management Tool -------------------------
-(Life Expectancy calculation)
+---------------- Life Prognosis & Management Tool (Life Expectancy calculation) -------------------------
+
 
 Overview
 

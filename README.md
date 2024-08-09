@@ -9,9 +9,9 @@ Prerequisites
 
 Before running the application, ensure you have the following installed on your system:
 
-Java Development Kit (JDK) 8 or higher
-Git Bash (for running the Bash scripts on Windows)
-OpenSSL (for password hashing)
+Java Development Kit (JDK) 8 or higher,
+Git Bash (for running the Bash scripts on Windows),
+OpenSSL (for password hashing),
 A Unix-like terminal (for non-Windows users)
 
 How to Run the Application

@@ -287,7 +287,7 @@ function calculate_life_expectancy {
 
     finalRemainingYears=$(awk "BEGIN {print int($remainingYearsOnDiagnosis) + 1}")
 
-    lifespan=$(awk "BEGIN {print $diagnosisYear + $finalRemainingYears}")
+    lifespan=$(awk "BEGIN {print $currentYear + $finalRemainingYears}")
 
     echo "Final remaining years after considering delay: $finalRemainingYears Years"
     echo "Your expected Year to Die: $lifespan"

@@ -59,5 +59,5 @@ Ensure you have the necessary permissions to execute Bash scripts on your system
 Compatibility issues may arise if not running on a Unix-like environment or using Git Bash on Windows.
 
 
-                Copyright Kalisimbi-4 Team
+Prepared by Kalisimbi-4 Team
 

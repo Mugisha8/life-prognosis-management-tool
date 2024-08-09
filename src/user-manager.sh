@@ -84,7 +84,7 @@ function login {
 function admin_menu {
     echo "Admin Menu"
     echo "1. Initiate Registration"
-    echo "2. Download empty CSV file"
+    echo "2. Download user CSV file"
     echo "3. Logout"
     read -p "Enter choice: " choice
     case $choice in
@@ -92,9 +92,17 @@ function admin_menu {
             initiate_registration
             ;;
         2)
-            echo "Downloading empty CSV files..."
-            echo "" > users.csv
-            echo "" > analytics.csv
+            echo "Downloading user data CSV file..."
+            cp user-store.txt users.csv
+            if [ -s users.csv ]; then
+            echo "Successfully downloaded users csv file. Here is a snippet of it."
+            echo ""
+            head users.csv
+            else
+            echo "Sorry something went wrong"
+
+            fi
+      
             ;;
         3)
             return

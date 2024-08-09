@@ -43,18 +43,10 @@ Complete Registration: Completes the registration process for users initiated by
 Login: Logs in a user. Admins can initiate new user registration and download user data, while patients can view and update their profiles and calculate life expectancy.
 Exit: Closes the application.
 
+Please follow the on-screen prompts to enter user details.
 
-Example Commands
+!! Important Remarks !!
 
-Login Example
-Select "LOGIN" from the menu.
-Enter your email and password.
-
-Complete Registration Example
-Select "Complete Registration" from the menu.
-Follow the on-screen prompts to enter user details.
-
-Known Issues
 Ensure you have the necessary permissions to execute Bash scripts on your system.
 Compatibility issues may arise if not running on a Unix-like environment or using Git Bash on Windows.
 

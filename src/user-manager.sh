@@ -85,7 +85,8 @@ function admin_menu {
     echo "Admin Menu"
     echo "1. Initiate Registration"
     echo "2. Download user CSV file"
-    echo "3. Logout"
+    echo "3. Download Analytics CSV file"
+    echo "4. Logout"
     read -p "Enter choice: " choice
     case $choice in
         1)
@@ -105,6 +106,9 @@ function admin_menu {
       
             ;;
         3)
+            download_analytics
+            ;;
+        4)
             return
             ;;
         *)
@@ -112,6 +116,21 @@ function admin_menu {
             ;;
     esac
 }
+
+function download_analytics {
+    echo "Generating analytics..."
+
+    echo "## Metrics, ## Value" > analytics.csv
+
+    average=$(awk -F, '{ if ($6 == "yes") { birthYear=strtonum(substr($5,1,4)); age=strtonum(substr($9,1,4)) - birthYear; sum += age; count++ } } END { if (count > 0) print sum/count }' $USER_STORE)
+    echo "Average Survival Years,$average" >> analytics.csv
+
+    median=$(awk -F, '{ if ($6 == "yes") { birthYear=strtonum(substr($5,1,4)); age=strtonum(substr($9,1,4)) - birthYear; print age } }' $USER_STORE | sort -n | awk ' { a[NR] = $1 } END { if (NR % 2 == 1) { print a[int(NR/2)+1] } else { print (a[NR/2] + a[NR/2+1]) / 2 } }')
+    echo "Median Survival Years,$median" >> analytics.csv
+
+    echo "Analytics file generated as analytics.csv"
+}
+
 
 function patient_menu {
     echo "Patient Menu"
@@ -232,6 +251,8 @@ function patient_menu {
             ;;
     esac
 }
+
+
 
 function calculate_life_expectancy {
     read -p "Enter your Email: " email

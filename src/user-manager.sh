@@ -125,11 +125,24 @@ function download_analytics {
     average=$(awk -F, '{ if ($6 == "yes") { birthYear=strtonum(substr($5,1,4)); age=strtonum(substr($9,1,4)) - birthYear; sum += age; count++ } } END { if (count > 0) print sum/count }' $USER_STORE)
     echo "Average Survival Years,$average" >> analytics.csv
 
+ 
     median=$(awk -F, '{ if ($6 == "yes") { birthYear=strtonum(substr($5,1,4)); age=strtonum(substr($9,1,4)) - birthYear; print age } }' $USER_STORE | sort -n | awk ' { a[NR] = $1 } END { if (NR % 2 == 1) { print a[int(NR/2)+1] } else { print (a[NR/2] + a[NR/2+1]) / 2 } }')
     echo "Median Survival Years,$median" >> analytics.csv
 
+    sorted_ages=$(awk -F, '{ if ($6 == "yes") { birthYear=strtonum(substr($5,1,4)); age=strtonum(substr($9,1,4)) - birthYear; print age } }' $USER_STORE | sort -n)
+
+    p25=$(echo "$sorted_ages" | awk ' { a[NR] = $1 } END { print a[int(NR*0.25)+1] }')
+    echo "25th Percentile of Survival Years,$p25" >> analytics.csv
+
+    p50=$(echo "$sorted_ages" | awk ' { a[NR] = $1 } END { if (NR % 2 == 1) { print a[int(NR/2)+1] } else { print (a[NR/2] + a[NR/2+1]) / 2 } }')
+    echo "50th Percentile (Median) of Survival Years,$p50" >> analytics.csv
+
+    p75=$(echo "$sorted_ages" | awk ' { a[NR] = $1 } END { print a[int(NR*0.75)+1] }')
+    echo "75th Percentile of Survival Years,$p75" >> analytics.csv
+
     echo "Analytics file generated as analytics.csv"
 }
+
 
 
 function patient_menu {
